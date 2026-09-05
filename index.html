@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Story of Arabs | سيرفر Story of Arabs — VRChat Community</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Orbitron, Cairo, Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@500;700;800;900&display=swap" rel="stylesheet" />
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            charcoal: {
+              950: '#070709',
+              900: '#0d0d11',
+              850: '#121217',
+              800: '#181820',
+              700: '#23232c',
+              600: '#32323d'
+            },
+            silver: {
+              100: '#f8f8fa',
+              200: '#eaeaf0',
+              300: '#d1d1db',
+              400: '#a3a3b2',
+              500: '#757586'
+            },
+            accent: {
+              glow: '#c8c8d8',
+              silver: '#e2e2ec',
+              dim: '#4f4f60'
+            }
+          },
+          fontFamily: {
+            display: ['Orbitron', 'sans-serif'],
+            body: ['Inter', 'sans-serif'],
+            arabic: ['Cairo', 'sans-serif']
+          },
+          animation: {
+            'float': 'float 7s ease-in-out infinite',
+            'shimmer': 'shimmer 4s linear infinite',
+            'pulse-subtle': 'pulseSubtle 4s ease-in-out infinite'
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-12px)' }
+            },
+            shimmer: {
+              '0%': { backgroundPosition: '-200% 0' },
+              '100%': { backgroundPosition: '200% 0' }
+            },
+            pulseSubtle: {
+              '0%, 100%': { opacity: '0.4' },
+              '50%': { opacity: '0.85' }
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #070709;
+      color: #e2e2ec;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      selection-background-color: #32323d;
+      selection-color: #ffffff;
+    }
+
+    [lang="ar"] body, .ar-mode {
+      font-family: 'Cairo', 'Inter', sans-serif;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 7px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0d0d11;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #23232c;
+      border-radius: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #3e3e4c;
+    }
+
+    /* Glassmorphism Classes */
+    .glass-card {
+      background: rgba(18, 18, 24, 0.65);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(226, 226, 236, 0.08);
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.7);
+    }
+
+    .glass-card-hover {
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .glass-card-hover:hover {
+      border-color: rgba(226, 226, 236, 0.28);
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.9), 0 0 25px rgba(200, 200, 220, 0.08);
+    }
+
+    .glass-nav {
+      background: rgba(10, 10, 14, 0.75);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(226, 226, 236, 0.07);
+    }
+
+    /* Metallic Text Gradients */
+    .text-metallic {
+      background: linear-gradient(135deg, #ffffff 0%, #d8d8e6 30%, #9090a2 65%, #ffffff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .text-metallic-silver {
+      background: linear-gradient(180deg, #ffffff 0%, #b8b8c8 50%, #76768a 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .text-shimmer {
+      background: linear-gradient(90deg, #a3a3b2 0%, #ffffff 50%, #a3a3b2 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmer 4s linear infinite;
+    }
+
+    /* Glowing Borders */
+    .glow-line {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(226, 226, 236, 0.3), transparent);
+    }
+
+    .glow-circle {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Buttons */
+    .btn-epic {
+      position: relative;
+      background: linear-gradient(135deg, rgba(240, 240, 255, 0.12), rgba(160, 160, 180, 0.04));
+      border: 1px solid rgba(226, 226, 236, 0.28);
+      box-shadow: 0 0 20px rgba(200, 200, 220, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .btn-epic:hover {
+      border-color: rgba(255, 255, 255, 0.6);
+      box-shadow: 0 0 35px rgba(226, 226, 236, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+      transform: translateY(-2px);
+      color: #ffffff;
+    }
+
+    /* Interactive canvas */
+    #mesh-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* RTL Support Adjustments */
+    html[dir="rtl"] .font-display {
+      font-family: 'Cairo', 'Orbitron', sans-serif;
+    }
+  </style>
+</head>
+
+<body class="bg-charcoal-950 text-silver-200 antialiased selection:bg-silver-500 selection:text-black">
+
+  <!-- Interactive Background Canvas & Ambient Lights -->
+  <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+    <canvas id="mesh-canvas"></canvas>
+    <div class="glow-circle w-[550px] h-[550px] bg-silver-400/5 -top-40 -left-20"></div>
+    <div class="glow-circle w-[650px] h-[650px] bg-charcoal-600/10 top-1/3 -right-40"></div>
+    <div class="glow-circle w-[500px] h-[500px] bg-silver-400/5 bottom-10 left-1/4"></div>
+    <!-- Fine Grid Overlay -->
+    <div class="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:48px_48px]"></div>
+  </div>
+
+  <!-- NAVIGATION -->
+  <header class="fixed top-0 left-0 right-0 z-50 glass-nav transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Brand Logo -->
+      <a href="#" class="flex items-center gap-3.5 group">
+        <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-silver-300/20 to-charcoal-800 border border-silver-400/30 flex items-center justify-center p-2 transition-all duration-300 group-hover:border-silver-200 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.2)]">
+          <!-- Stylized Falcon/Shield Icon -->
+          <svg class="w-6 h-6 text-silver-100 transition-transform duration-300 group-hover:scale-110" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2L3 7v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V7l-9-5z"/>
+            <path d="M12 7v10"/>
+            <path d="M8 11h8"/>
+          </svg>
+        </div>
+        <div class="flex flex-col">
+          <span class="font-display font-black tracking-widest text-base sm:text-lg text-metallic uppercase leading-none">STORY OF ARABS</span>
+          <span class="font-arabic text-xs text-silver-400 tracking-wider font-semibold">سيرفر العرب الأسطوري</span>
+        </div>
+      </a>
+
+      <!-- Desktop Links -->
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium tracking-wide">
+        <a href="#hero" class="text-silver-300 hover:text-white transition-colors py-1" data-i18n="nav_home">Home</a>
+        <a href="#journey" class="text-silver-400 hover:text-white transition-colors py-1" data-i18n="nav_journey">Our Epic Journey</a>
+        <a href="#founder" class="text-silver-400 hover:text-white transition-colors py-1" data-i18n="nav_founder">Leadership</a>
+        <a href="#resilience" class="text-silver-400 hover:text-white transition-colors py-1" data-i18n="nav_resilience">The Legacy</a>
+        <a href="#values" class="text-silver-400 hover:text-white transition-colors py-1" data-i18n="nav_values">Core Values</a>
+      </nav>
+
+      <!-- Language Switcher & Discord CTA -->
+      <div class="flex items-center gap-3.5">
+        <!-- Arabic / English Toggle -->
+        <button id="langToggleBtn" onclick="toggleLanguage()" class="px-3 py-1.5 rounded-lg border border-silver-400/20 hover:border-silver-300 bg-charcoal-900/60 text-xs font-semibold tracking-wider text-silver-200 transition-all flex items-center gap-1.5 hover:bg-charcoal-800">
+          <svg class="w-3.5 h-3.5 text-silver-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+          </svg>
+          <span id="langLabel">العربية</span>
+        </button>
+
+        <a href="#discord-join" class="btn-epic px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold tracking-wider flex items-center gap-2 text-white">
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+            <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.929 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.893.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+          </svg>
+          <span class="hidden sm:inline" data-i18n="nav_discord">Join Discord</span>
+        </a>
+
+        <!-- Mobile Menu Hamburger -->
+        <button onclick="toggleMobileMenu()" class="md:hidden p-2 text-silver-300 hover:text-white" aria-label="Toggle Menu">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+          </svg>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Mobile Drawer -->
+    <div id="mobileMenu" class="hidden md:hidden glass-card border-t border-silver-400/10 px-6 py-5 flex flex-col gap-4 text-sm font-medium">
+      <a href="#hero" onclick="toggleMobileMenu()" class="text-silver-300 hover:text-white" data-i18n="nav_home">Home</a>
+      <a href="#journey" onclick="toggleMobileMenu()" class="text-silver-300 hover:text-white" data-i18n="nav_journey">Our Epic Journey</a>
+      <a href="#founder" onclick="toggleMobileMenu()" class="text-silver-300 hover:text-white" data-i18n="nav_founder">Leadership</a>
+      <a href="#resilience" onclick="toggleMobileMenu()" class="text-silver-300 hover:text-white" data-i18n="nav_resilience">The Legacy</a>
+      <a href="#values" onclick="toggleMobileMenu()" class="text-silver-300 hover:text-white" data-i18n="nav_values">Core Values</a>
+    </div>
+  </header>
+
+  <!-- 1. HERO SECTION -->
+  <section id="hero" class="relative min-h-screen pt-32 pb-20 flex items-center justify-center z-10 px-4 sm:px-6">
+    <div class="max-w-5xl mx-auto text-center flex flex-col items-center">
+      
+      <!-- Top Badge -->
+      <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-silver-400/20 bg-charcoal-900/80 backdrop-blur-md mb-8 animate-float shadow-[0_0_20px_rgba(255,255,255,0.04)]">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span class="text-xs font-semibold uppercase tracking-widest text-silver-300" data-i18n="hero_badge">VRCHAT ARAB EMPIRE • ESTABLISHED & ASCENDANT</span>
+      </div>
+
+      <!-- Main Headline -->
+      <h1 class="font-display font-black text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight leading-none mb-6">
+        <span class="text-metallic drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)] block" data-i18n="hero_title">STORY OF ARABS</span>
+      </h1>
+
+      <!-- Subtitle -->
+      <p class="font-display sm:text-2xl text-xl text-silver-300 tracking-wider font-semibold mb-4 text-shimmer" data-i18n="hero_subtitle">
+        Where Legends Forge Their Path
+      </p>
+      <p class="font-arabic text-lg sm:text-xl text-silver-400 font-bold mb-6" data-i18n="hero_subtitle_ar">
+        حيث يصنع الأساطير مجدهم وتخلد القصص
+      </p>
+
+      <!-- Cinematic Paragraph -->
+      <p class="max-w-2xl text-silver-400 text-sm sm:text-base leading-relaxed mb-10 font-normal" data-i18n="hero_desc">
+        Welcome to the pinnacle of Arab virtual community excellence. An unyielding brotherhood, transcendent virtual realms, and an authentic sanctuary engineered in VRChat for the true pioneers of virtual reality.
+      </p>
+
+      <!-- Call To Action Buttons -->
+      <div class="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
+        <a href="https://discord.gg" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto btn-epic px-8 py-4 rounded-xl text-sm font-display font-bold uppercase tracking-widest text-white flex items-center justify-center gap-3 group">
+          <svg class="w-5 h-5 fill-current text-silver-200 group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
+            <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.929 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.893.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+          </svg>
+          <span data-i18n="btn_discord">Join Our Discord</span>
+        </a>
+
+        <a href="#worlds" class="w-full sm:w-auto px-8 py-4 rounded-xl border border-silver-500/20 bg-charcoal-900/60 hover:bg-charcoal-800 text-sm font-display font-semibold uppercase tracking-widest text-silver-300 hover:text-white transition-all flex items-center justify-center gap-2 group">
+          <svg class="w-5 h-5 text-silver-400 group-hover:text-silver-200 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polygon points="10 8 16 12 10 16 10 8"></polygon>
+          </svg>
+          <span data-i18n="btn_explore">Explore Worlds</span>
+        </a>
+      </div>
+
+      <!-- Live Community Metrics -->
+      <div class="w-full mt-20 pt-10 border-t border-silver-400/10 grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div class="glass-card p-5 rounded-2xl text-center">
+          <div class="font-display font-extrabold text-2xl sm:text-3xl text-metallic">10,000+</div>
+          <div class="text-xs uppercase tracking-wider text-silver-400 mt-1" data-i18n="stat_members">Active Members</div>
+        </div>
+        <div class="glass-card p-5 rounded-2xl text-center">
+          <div class="font-display font-extrabold text-2xl sm:text-3xl text-metallic">500+</div>
+          <div class="text-xs uppercase tracking-wider text-silver-400 mt-1" data-i18n="stat_events">Hosted Gatherings</div>
+        </div>
+        <div class="glass-card p-5 rounded-2xl text-center">
+          <div class="font-display font-extrabold text-2xl sm:text-3xl text-metallic">24 / 7</div>
+          <div class="text-xs uppercase tracking-wider text-silver-400 mt-1" data-i18n="stat_voice">Voice & VR Hubs</div>
+        </div>
+        <div class="glass-card p-5 rounded-2xl text-center">
+          <div class="font-display font-extrabold text-2xl sm:text-3xl text-metallic">100%</div>
+          <div class="text-xs uppercase tracking-wider text-silver-400 mt-1" data-i18n="stat_resilient">Unbroken Armor</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 2. OUR EPIC JOURNEY (HISTORY & ROOTS) -->
+  <section id="journey" class="relative py-28 z-10 px-4 sm:px-8">
+    <div class="max-w-6xl mx-auto">
+      
+      <!-- Section Title Header -->
+      <div class="text-center mb-20">
+        <span class="text-xs font-display tracking-[0.25em] uppercase text-silver-400 mb-3 block" data-i18n="journey_tag">OUR ROOTS & ORIGIN</span>
+        <h2 class="font-display text-3xl sm:text-5xl font-extrabold text-metallic mb-4" data-i18n="journey_title">The Epic Genesis: Rec Room to VRChat</h2>
+        <p class="font-arabic text-lg text-silver-400 max-w-2xl mx-auto" data-i18n="journey_subtitle">
+          قصة البدايات من لعبة "Rec Room" وكيف تحول التحدي إلى ميلاد الإمبراطورية الأقوى
+        </p>
+        <div class="w-24 h-1 bg-gradient-to-r from-transparent via-silver-400/50 to-transparent mx-auto mt-6"></div>
+      </div>
+
+      <!-- Chronological Journey Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+        
+        <!-- Step 1: The Spark in Rec Room -->
+        <div class="glass-card glass-card-hover p-8 rounded-2xl relative overflow-hidden flex flex-col justify-between">
+          <div class="absolute -right-10 -bottom-10 w-36 h-36 bg-white/[0.02] rounded-full"></div>
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-charcoal-800 border border-silver-400/20 flex items-center justify-center font-display font-bold text-silver-100 text-lg mb-6">
+              01
+            </div>
+            <h3 class="font-display font-bold text-xl text-white mb-3" data-i18n="journey_step1_title">The Rec Room Dawn</h3>
+            <p class="text-silver-400 text-sm leading-relaxed mb-4" data-i18n="journey_step1_desc">
+              It all originated in the cozy halls of Rec Room. A small band of impassioned Arab gamers united with a dream: creating an authentic home without toxicity, where respect and camaraderie reigned supreme.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-silver-400/10 text-xs font-arabic text-silver-500" data-i18n="journey_step1_ar">
+            البذرة الأولى وروح الأخوة النقية التي انطلقت من ريك روم.
+          </div>
+        </div>
+
+        <!-- Step 2: The Shift & Crucible -->
+        <div class="glass-card glass-card-hover p-8 rounded-2xl relative overflow-hidden flex flex-col justify-between border-silver-400/25">
+          <div class="absolute top-0 right-0 w-28 h-28 bg-silver-400/5 rounded-bl-full"></div>
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-charcoal-700 border border-silver-300/40 flex items-center justify-center font-display font-bold text-white text-lg mb-6 shadow-[0_0_15px_rgba(255,255,255,0.1)]">
+              02
+            </div>
+            <h3 class="font-display font-bold text-xl text-white mb-3" data-i18n="journey_step2_title">The Great Metamorphosis</h3>
+            <p class="text-silver-300 text-sm leading-relaxed mb-4" data-i18n="journey_step2_desc">
+              When Rec Room shifted and servers fell, lesser communities scattered and dissolved into dust. But Story of Arabs didn’t bow. Instead, the leadership converted every barrier into raw fuel for reinvention.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-silver-400/10 text-xs font-arabic text-silver-400 font-semibold" data-i18n="journey_step2_ar">
+            لم ننكسر بزوال ريك روم، بل أعدنا صياغة المستحيل وبدأنا العصر الجديد.
+          </div>
+        </div>
+
+        <!-- Step 3: VRChat Reign -->
+        <div class="glass-card glass-card-hover p-8 rounded-2xl relative overflow-hidden flex flex-col justify-between">
+          <div class="absolute -left-10 -bottom-10 w-36 h-36 bg-white/[0.02] rounded-full"></div>
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-charcoal-800 border border-silver-400/20 flex items-center justify-center font-display font-bold text-silver-100 text-lg mb-6">
+              03
+            </div>
+            <h3 class="font-display font-bold text-xl text-white mb-3" data-i18n="journey_step3_title">Ascendance in VRChat</h3>
+            <p class="text-silver-400 text-sm leading-relaxed mb-4" data-i18n="journey_step3_desc">
+              Migrating to VRChat opened unbounded frontiers. Custom architecture, ultra-realistic Arab heritage worlds, grand cultural festivals, and an unbreakable community footprint solidified our legendary status.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-silver-400/10 text-xs font-arabic text-silver-500" data-i18n="journey_step3_ar">
+            الهيمنة على عالم الواقع الافتراضي وبناء أكبر وأرقى مجتمع عربي.
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Narrative Banner -->
+      <div class="mt-12 glass-card p-8 rounded-2xl border border-silver-400/20 text-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-silver-400/0 via-silver-400/5 to-silver-400/0 pointer-events-none"></div>
+        <p class="font-arabic text-base sm:text-xl text-silver-200 font-bold leading-relaxed" data-i18n="journey_quote">
+          "لم تكن البداية في ريك روم مجرد ألعاب، بل كانت عهداً كُتب في قلوبنا: أن يبقى مجتمع العرب شامخاً لا تهزه عواصف المنصات ولا تبدلات الزمان."
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 3. THE VISIONARY FOUNDER & LEADERSHIP -->
+  <section id="founder" class="relative py-28 z-10 px-4 sm:px-8 bg-charcoal-900/40">
+    <div class="max-w-6xl mx-auto">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- Left Column: Founder Emblem & Profile -->
+        <div class="lg:col-span-5 flex flex-col items-center text-center">
+          <div class="relative group">
+            
+            <!-- Metallic Frame Glow -->
+            <div class="w-64 h-64 sm:w-72 sm:h-72 rounded-3xl p-1 bg-gradient-to-b from-silver-200/40 via-charcoal-700 to-silver-400/20 shadow-[0_0_50px_rgba(200,200,220,0.15)] relative">
+              <div class="w-full h-full rounded-[22px] bg-charcoal-950 flex flex-col items-center justify-center p-6 text-center overflow-hidden relative">
+                
+                <!-- Background Geometric Shield Pattern -->
+                <svg class="absolute inset-0 w-full h-full opacity-10 text-silver-200" viewBox="0 0 100 100">
+                  <polygon points="50 5, 90 25, 90 75, 50 95, 10 75, 10 25" fill="none" stroke="currentColor" stroke-width="1"/>
+                  <polygon points="50 15, 80 30, 80 70, 50 85, 20 70, 20 30" fill="none" stroke="currentColor" stroke-width="0.75"/>
+                </svg>
+
+                <!-- Commander Crown/Hawk Icon -->
+                <div class="w-20 h-20 rounded-2xl bg-charcoal-850 border border-silver-400/30 flex items-center justify-center mb-4 shadow-[0_0_25px_rgba(255,255,255,0.08)] group-hover:scale-105 transition-transform duration-300">
+                  <svg class="w-10 h-10 text-silver-100" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                  </svg>
+                </div>
+
+                <div class="font-arabic font-black text-3xl text-metallic mb-1">طير شلوى</div>
+                <div class="text-xs font-display tracking-[0.2em] text-silver-400 uppercase">TAYR SHALWA</div>
+                <div class="mt-3 px-3 py-1 rounded-full bg-silver-400/10 border border-silver-400/20 text-[11px] font-semibold tracking-wider text-silver-300" data-i18n="founder_role">
+                  Founder & Supreme Architect
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Floating Shield Tag -->
+            <div class="absolute -bottom-4 left-1/2 -translate-x-1/2 glass-card px-4 py-1.5 rounded-xl border border-silver-300/30 flex items-center gap-2 whitespace-nowrap shadow-xl">
+              <span class="w-2 h-2 rounded-full bg-silver-300 animate-ping"></span>
+              <span class="font-arabic text-xs font-bold text-silver-200">العدالة والقوة والإخلاص</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: The Tribute -->
+        <div class="lg:col-span-7 flex flex-col justify-center">
+          <span class="text-xs font-display tracking-[0.25em] uppercase text-silver-400 mb-2" data-i18n="founder_badge">VISIONARY LEADERSHIP</span>
+          <h2 class="font-display text-3xl sm:text-4xl font-extrabold text-white mb-3" data-i18n="founder_headline">
+            Forged in Dedication: The Architect Behind the Wall
+          </h2>
+          <h3 class="font-arabic text-xl sm:text-2xl font-bold text-silver-300 mb-6" data-i18n="founder_headline_ar">
+            تحية إجلال لمؤسس الصرح «طير شلوى»
+          </h3>
+
+          <div class="space-y-4 text-silver-400 text-sm sm:text-base leading-relaxed font-normal">
+            <p data-i18n="founder_p1">
+              True leadership is neither given nor inherited; it is earned through relentless devotion, sleepless nights, and the courage to shield an entire community from chaos.
+            </p>
+            <p class="font-arabic text-silver-300 font-semibold" data-i18n="founder_p2">
+              بذل المؤسس «طير شلوى» ساعات طوال وليالي لا تُعد في صياغة نظام إداري عادل وصارم، لا يفرّق بين عضو وآخر، واضعاً مصلحة المجتمع وكرامة أفراده فوق كل اعتبار.
+            </p>
+            <p data-i18n="founder_p3">
+              Under his steadfast stewardship, Story of Arabs transformed into an unbreakable citadel. He established an administrative system renowned for strict impartiality, impenetrable cybersecurity, and unwavering loyalty to every single Arab player who enters our gates.
+            </p>
+          </div>
+
+          <!-- Key Principles of His Governance -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8 pt-6 border-t border-silver-400/10">
+            <div class="flex items-start gap-3">
+              <div class="w-8 h-8 rounded-lg bg-charcoal-800 border border-silver-400/20 flex items-center justify-center shrink-0 mt-0.5">
+                <svg class="w-4 h-4 text-silver-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+              </div>
+              <div>
+                <h4 class="text-sm font-bold text-white font-display" data-i18n="pillar1_title">Ironclad Impartiality</h4>
+                <p class="text-xs text-silver-400 font-arabic" data-i18n="pillar1_desc">لا وساطة ولا محاباة، القانون يطبّق بعدل على الجميع.</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3">
+              <div class="w-8 h-8 rounded-lg bg-charcoal-800 border border-silver-400/20 flex items-center justify-center shrink-0 mt-0.5">
+                <svg class="w-4 h-4 text-silver-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+              </div>
+              <div>
+                <h4 class="text-sm font-bold text-white font-display" data-i18n="pillar2_title">Unbreakable Integrity</h4>
+                <p class="text-xs text-silver-400 font-arabic" data-i18n="pillar2_desc">حماية تامة للخصوصية وصون كرامة كل عضو ينضم إلينا.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 4. THE LEGACY OF RESILIENCE (OUR STORY & TRIUMPH) -->
+  <section id="resilience" class="relative py-28 z-10 px-4 sm:px-8 overflow-hidden">
+    <!-- Glow Background highlight -->
+    <div class="glow-circle w-[700px] h-[350px] bg-silver-300/5 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
+
+    <div class="max-w-5xl mx-auto text-center relative">
+      
+      <span class="text-xs font-display tracking-[0.3em] uppercase text-silver-400 mb-3 block" data-i18n="resilience_tag">
+        THE UNBREAKABLE FORTRESS
+      </span>
+      
+      <h2 class="font-display text-3xl sm:text-5xl font-black text-metallic mb-6" data-i18n="resilience_title">
+        The Legacy of Resilience
+      </h2>
+
+      <p class="font-arabic text-xl sm:text-2xl font-extrabold text-silver-200 mb-8" data-i18n="resilience_ar_title">
+        تحطمت مكائدهم على صخرة تلاحمنا، فخابوا وبقينا
+      </p>
+
+      <div class="glass-card p-8 sm:p-12 rounded-3xl border border-silver-400/20 relative backdrop-blur-xl">
+        <div class="max-w-3xl mx-auto space-y-6 text-silver-300 leading-relaxed text-sm sm:text-base text-justify sm:text-center">
+          <p data-i18n="resilience_p1">
+            Across our history, many adversaries, ill-willed actors, and malicious detractors tried to fracture our unity. They orchestrated attacks, circulated rumors, and launched countless campaigns attempting to see this sanctuary collapse.
+          </p>
+
+          <p class="font-arabic text-silver-100 font-semibold text-base sm:text-lg" data-i18n="resilience_p2">
+            ولكنهم تناسوا أمراً جوهرياً: سيرفر "Story of Arabs" ليس مجرد غرف صوتية أو عوالم افتراضية، بل هو حصن منيع تحرسه إدارة واعية ورجال عاهدوا أنفسهم على التضحية بكل ثمين لحماية هذا البيت. لقد فشل كل حاقد وتراجع كل مخرب خاسئاً.
+          </p>
+
+          <p data-i18n="resilience_p3">
+            Every attack only cemented our foundation. Every malice dissolved in front of our collective vigilance. The server did not merely survive; it thrived, expanding beyond imagination, leaving detractors in the silence of their own downfall.
+          </p>
+
+          <!-- Core Motto Box -->
+          <div class="mt-8 pt-8 border-t border-silver-400/15 flex flex-col items-center">
+            <span class="text-xs uppercase font-display tracking-widest text-silver-400 mb-2" data-i18n="motto_tag">OUR ETERNAL PLEDGE</span>
+            <div class="font-arabic text-3xl sm:text-4xl md:text-5xl font-black text-metallic tracking-wide py-2" data-i18n="motto_text">
+              "يد بيد دائماً وأبداً"
+            </div>
+            <div class="text-xs sm:text-sm font-display tracking-widest text-silver-400 uppercase mt-1">
+              HAND IN HAND — ALWAYS & FOREVER
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 5. COMMUNITY & CORE VALUES (GRID) -->
+  <section id="values" class="relative py-28 z-10 px-4 sm:px-8 bg-charcoal-900/30">
+    <div class="max-w-6xl mx-auto">
+      
+      <div class="text-center mb-20">
+        <span class="text-xs font-display tracking-[0.25em] uppercase text-silver-400 mb-2 block" data-i18n="values_tag">OUR SACRED PILLARS</span>
+        <h2 class="font-display text-3xl sm:text-5xl font-extrabold text-metallic mb-3" data-i18n="values_title">Community Core Values</h2>
+        <p class="font-arabic text-lg text-silver-400" data-i18n="values_subtitle">المبادئ الراسخة التي تحكم أسرتنا في كل مكان وزمان</p>
+        <div class="w-24 h-1 bg-gradient-to-r from-transparent via-silver-400/50 to-transparent mx-auto mt-6"></div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <!-- Value 1: Strength -->
+        <div class="glass-card glass-card-hover p-8 rounded-2xl flex flex-col justify-between group">
+          <div>
+            <div class="w-14 h-14 rounded-xl bg-charcoal-800 border border-silver-400/20 flex items-center justify-center mb-6 text-silver-200 group-hover:border-silver-200 transition-colors">
+              <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+              </svg>
+            </div>
+            <div class="font-arabic text-2xl font-extrabold text-white mb-1" data-i18n="val1_title_ar">القوة</div>
+            <h3 class="font-display text-base font-bold text-silver-300 uppercase tracking-wider mb-3" data-i18n="val1_title_en">STRENGTH</h3>
+            <p class="text-silver-400 text-xs sm:text-sm leading-relaxed" data-i18n="val1_desc">
+              Inner fortitude to face difficulties and stand firm, maintaining our community’s honor and unwavering security under any circumstance.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-silver-400/10 text-[11px] font-arabic text-silver-500" data-i18n="val1_footer">
+            عزيمة لا تلين وإصرار على التميز الدائم.
+          </div>
+        </div>
+
+        <!-- Value 2: Unity -->
+        <div class="glass-card glass-card-hover p-8 rounded-2xl flex flex-col justify-between group">
+          <div>
+            <div class="w-14 h-14 rounded-xl bg-charcoal-800 border border-silver-400/20 flex items-center justify-center mb-6 text-silver-200 group-hover:border-silver-200 transition-colors">
+              <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+              </svg>
+            </div>
+            <div class="font-arabic text-2xl font-extrabold text-white mb-1" data-i18n="val2_title_ar">الوحدة</div>
+            <h3 class="font-display text-base font-bold text-silver-300 uppercase tracking-wider mb-3" data-i18n="val2_title_en">UNITY</h3>
+            <p class="text-silver-400 text-xs sm:text-sm leading-relaxed" data-i18n="val2_desc">
+              Arab brothers and sisters from the Gulf to the Ocean united as one body. No borders, no prejudice—only shared destiny and warmth.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-silver-400/10 text-[11px] font-arabic text-silver-500" data-i18n="val2_footer">
+            قلب واحد يجمع كافة أبناء الوطن العربي.
+          </div>
+        </div>
+
+        <!-- Value 3: Justice -->
+        <div class="glass-card glass-card-hover p-8 rounded-2xl flex flex-col justify-between group">
+          <div>
+            <div class="w-14 h-14 rounded-xl bg-charcoal-800 border border-silver-400/20 flex items-center justify-center mb-6 text-silver-200 group-hover:border-silver-200 transition-colors">
+              <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"></path>
+              </svg>
+            </div>
+            <div class="font-arabic text-2xl font-extrabold text-white mb-1" data-i18n="val3_title_ar">العدالة</div>
+            <h3 class="font-display text-base font-bold text-silver-300 uppercase tracking-wider mb-3" data-i18n="val3_title_en">JUSTICE</h3>
+            <p class="text-silver-400 text-xs sm:text-sm leading-relaxed" data-i18n="val3_desc">
+              Rules apply unequivocally to everyone. An impartial administrative system that defends the oppressed and stops any wrongdoing instantly.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-silver-400/10 text-[11px] font-arabic text-silver-500" data-i18n="val3_footer">
+            الحق يعلو ولا يُعلى عليه في شريعة مجتمعنا.
+          </div>
+        </div>
+
+        <!-- Value 4: Brotherhood -->
+        <div class="glass-card glass-card-hover p-8 rounded-2xl flex flex-col justify-between group">
+          <div>
+            <div class="w-14 h-14 rounded-xl bg-charcoal-800 border border-silver-400/20 flex items-center justify-center mb-6 text-silver-200 group-hover:border-silver-200 transition-colors">
+              <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+              </svg>
+            </div>
+            <div class="font-arabic text-2xl font-extrabold text-white mb-1" data-i18n="val4_title_ar">الأخوة</div>
+            <h3 class="font-display text-base font-bold text-silver-300 uppercase tracking-wider mb-3" data-i18n="val4_title_en">BROTHERHOOD</h3>
+            <p class="text-silver-400 text-xs sm:text-sm leading-relaxed" data-i18n="val4_desc">
+              Lifelong friendships forged in virtual worlds that extend beyond the screen, building memories, genuine support, and true family.
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-silver-400/10 text-[11px] font-arabic text-silver-500" data-i18n="val4_footer">
+            أخوة تمتد وتصمد في كل الأوقات والمناسبات.
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 6. VRCHAT WORLDS SHOWCASE (IMMERSIVE PREVIEW) -->
+  <section id="worlds" class="relative py-28 z-10 px-4 sm:px-8">
+    <div class="max-w-6xl mx-auto">
+      
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-16">
+        <div>
+          <span class="text-xs font-display tracking-[0.25em] uppercase text-silver-400 mb-2 block" data-i18n="worlds_tag">VIRTUAL SANCTUARIES</span>
+          <h2 class="font-display text-3xl sm:text-5xl font-extrabold text-metallic" data-i18n="worlds_title">Engineered For Immersion</h2>
+          <p class="font-arabic text-base sm:text-lg text-silver-400 mt-2" data-i18n="worlds_subtitle">عوالم مخصصة بأحدث التقنيات وأجواء عربية أصيلة</p>
+        </div>
+        <div class="mt-6 md:mt-0">
+          <a href="https://vrchat.com" target="_blank" rel="noopener noreferrer" class="text-xs font-display font-semibold tracking-wider text-silver-300 hover:text-white flex items-center gap-2 group">
+            <span data-i18n="worlds_browse">BROWSE ALL CUSTOM INSTANCES</span>
+            <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- World 1 -->
+        <div class="glass-card rounded-2xl overflow-hidden group">
+          <div class="h-48 bg-gradient-to-br from-charcoal-700 via-charcoal-850 to-charcoal-950 p-6 flex flex-col justify-between relative">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.08),transparent_70%)]"></div>
+            <div class="flex justify-between items-start z-10">
+              <span class="px-2.5 py-1 rounded bg-charcoal-900/80 border border-silver-400/20 text-[10px] font-display uppercase tracking-widest text-silver-300">Public Hub</span>
+              <span class="flex items-center gap-1.5 text-xs text-emerald-400 font-semibold">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Active
+              </span>
+            </div>
+            <div class="z-10">
+              <h4 class="font-display font-bold text-lg text-white">Arabia Horizon Lounge</h4>
+              <p class="font-arabic text-xs text-silver-400">مجلس النخبة الفاخر</p>
+            </div>
+          </div>
+          <div class="p-6">
+            <p class="text-silver-400 text-xs sm:text-sm leading-relaxed mb-6" data-i18n="world1_desc">
+              Stunning modern Arabic majlis, custom audio reactive lighting, dynamic mirror setups, and chill lounge vibes for deep evening conversations.
+            </p>
+            <button onclick="launchWorldAlert('Arabia Horizon Lounge')" class="w-full py-2.5 rounded-lg border border-silver-400/20 hover:border-silver-200 bg-charcoal-800/80 text-xs font-display tracking-wider font-semibold text-silver-200 hover:text-white transition-all flex items-center justify-center gap-2">
+              <svg class="w-4 h-4 text-silver-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+              <span data-i18n="btn_join_world">Launch in VRChat</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- World 2 -->
+        <div class="glass-card rounded-2xl overflow-hidden group">
+          <div class="h-48 bg-gradient-to-br from-charcoal-600 via-charcoal-800 to-charcoal-950 p-6 flex flex-col justify-between relative">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(226,226,236,0.06),transparent_70%)]"></div>
+            <div class="flex justify-between items-start z-10">
+              <span class="px-2.5 py-1 rounded bg-charcoal-900/80 border border-silver-400/20 text-[10px] font-display uppercase tracking-widest text-silver-300">Community Special</span>
+              <span class="flex items-center gap-1.5 text-xs text-emerald-400 font-semibold">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Active
+              </span>
+            </div>
+            <div class="z-10">
+              <h4 class="font-display font-bold text-lg text-white">Fortress of Legends</h4>
+              <p class="font-arabic text-xs text-silver-400">قلعة الأساطير والفعاليات الكبرى</p>
+            </div>
+          </div>
+          <div class="p-6">
+            <p class="text-silver-400 text-xs sm:text-sm leading-relaxed mb-6" data-i18n="world2_desc">
+              An epic desert cyber-palace host to weekly tournaments, talent showdowns, community meetings, and historic celebration ceremonies.
+            </p>
+            <button onclick="launchWorldAlert('Fortress of Legends')" class="w-full py-2.5 rounded-lg border border-silver-400/20 hover:border-silver-200 bg-charcoal-800/80 text-xs font-display tracking-wider font-semibold text-silver-200 hover:text-white transition-all flex items-center justify-center gap-2">
+              <svg class="w-4 h-4 text-silver-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+              <span data-i18n="btn_join_world">Launch in VRChat</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- World 3 -->
+        <div class="glass-card rounded-2xl overflow-hidden group">
+          <div class="h-48 bg-gradient-to-br from-charcoal-700 via-charcoal-900 to-charcoal-950 p-6 flex flex-col justify-between relative">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.05),transparent_70%)]"></div>
+            <div class="flex justify-between items-start z-10">
+              <span class="px-2.5 py-1 rounded bg-charcoal-900/80 border border-silver-400/20 text-[10px] font-display uppercase tracking-widest text-silver-300">Midnight Hub</span>
+              <span class="flex items-center gap-1.5 text-xs text-silver-400 font-semibold">
+                <span class="w-1.5 h-1.5 rounded-full bg-silver-400"></span> Chill Voice
+              </span>
+            </div>
+            <div class="z-10">
+              <h4 class="font-display font-bold text-lg text-white">Oasis Starlight Pavilion</h4>
+              <p class="font-arabic text-xs text-silver-400">واحة النجوم الهادئة</p>
+            </div>
+          </div>
+          <div class="p-6">
+            <p class="text-silver-400 text-xs sm:text-sm leading-relaxed mb-6" data-i18n="world3_desc">
+              Atmospheric night skies with glowing dunes, relaxing waterfalls, interactive media players, and private booths for personal heartfelt talks.
+            </p>
+            <button onclick="launchWorldAlert('Oasis Starlight Pavilion')" class="w-full py-2.5 rounded-lg border border-silver-400/20 hover:border-silver-200 bg-charcoal-800/80 text-xs font-display tracking-wider font-semibold text-silver-200 hover:text-white transition-all flex items-center justify-center gap-2">
+              <svg class="w-4 h-4 text-silver-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+              <span data-i18n="btn_join_world">Launch in VRChat</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 7. GRAND CALL TO ACTION BANNER -->
+  <section id="discord-join" class="relative py-24 z-10 px-4 sm:px-8">
+    <div class="max-w-5xl mx-auto glass-card rounded-3xl p-8 sm:p-14 border border-silver-400/25 relative overflow-hidden text-center shadow-[0_0_60px_rgba(0,0,0,0.8)]">
+      
+      <!-- Ambient Backlight inside card -->
+      <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-96 h-96 bg-silver-300/10 rounded-full blur-3xl pointer-events-none"></div>
+
+      <span class="text-xs font-display tracking-[0.3em] uppercase text-silver-300 mb-3 block" data-i18n="cta_tag">ENTER THE SANCTUARY</span>
+      
+      <h2 class="font-display text-3xl sm:text-5xl font-black text-metallic mb-4" data-i18n="cta_title">
+        Your Seat Among Legends Awaits
+      </h2>
+
+      <p class="font-arabic text-xl sm:text-2xl font-bold text-silver-200 mb-6" data-i18n="cta_subtitle_ar">
+        انضم إلينا الآن وكن جزءاً من تاريخ يُكتب
+      </p>
+
+      <p class="max-w-2xl mx-auto text-silver-400 text-sm sm:text-base leading-relaxed mb-10" data-i18n="cta_desc">
+        Whether you are an experienced VR veteran, an avatar creator, or someone stepping into VRChat for the very first time, the Story of Arabs family opens its arms to honor-driven souls.
+      </p>
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="https://discord.gg" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto btn-epic px-10 py-4 rounded-xl text-sm font-display font-bold uppercase tracking-widest text-white flex items-center justify-center gap-3 shadow-lg">
+          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+            <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.929 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.893.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
+          </svg>
+          <span data-i18n="cta_btn">Join Discord Server</span>
+        </a>
+
+        <a href="#hero" class="w-full sm:w-auto px-8 py-4 rounded-xl border border-silver-400/20 bg-charcoal-900/60 hover:bg-charcoal-800 text-sm font-display font-semibold tracking-wider text-silver-300 hover:text-white transition-all flex items-center justify-center">
+          <span data-i18n="cta_back">Back to Top ↑</span>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 8. FOOTER -->
+  <footer class="relative z-10 border-t border-silver-400/10 bg-charcoal-950 py-14 px-4 sm:px-8">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
+      
+      <!-- Logo & Motto -->
+      <div class="flex items-center gap-4">
+        <div class="w-10 h-10 rounded-xl bg-charcoal-850 border border-silver-400/25 flex items-center justify-center">
+          <svg class="w-5 h-5 text-silver-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M12 2L3 7v6c0 5.5 3.8 10.7 9 12 5.2-1.3 9-6.5 9-12V7l-9-5z"/>
+          </svg>
+        </div>
+        <div>
+          <div class="font-display font-black text-sm text-silver-200 uppercase tracking-widest">Story of Arabs</div>
+          <div class="font-arabic text-xs text-silver-500 font-semibold">سيرفر Story of Arabs — يد بيد دائماً وأبداً</div>
+        </div>
+      </div>
+
+      <!-- Center Creed -->
+      <div class="text-center font-arabic text-xs text-silver-400 max-w-sm">
+        مجتمع عربي عريق في VRChat تأسس على الاحترام المتبادل، العدالة، وروح الأخوة الدائمة.
+      </div>
+
+      <!-- Copyright Notice -->
+      <div class="text-right text-xs text-silver-500 font-body">
+        <div>&copy; <span id="year">2025</span> Story of Arabs Server. All Rights Reserved.</div>
+        <div class="text-[11px] text-silver-600 mt-1">Not directly affiliated with VRChat Inc.</div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Notification Toast for Launch Alert -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 glass-card px-5 py-3 rounded-xl border border-silver-300/30 text-silver-200 text-sm hidden flex items-center gap-3 shadow-2xl transition-all">
+    <svg class="w-5 h-5 text-emerald-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+    </svg>
+    <span id="toastMsg">VRChat instance link ready</span>
+  </div>
+
+  <!-- JAVASCRIPT: PARTICLE MESH, INTERACTIVITY, BILINGUAL TOGGLE -->
+  <script>
+    // Set Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Responsive Mobile Menu
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      menu.classList.toggle('hidden');
+    }
+
+    // World Launch Feedback
+    function launchWorldAlert(worldName) {
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toastMsg');
+      toastMsg.textContent = `Connecting to ${worldName}... Open VRChat client!`;
+      toast.classList.remove('hidden');
+      setTimeout(() => {
+        toast.classList.add('hidden');
+      }, 4000);
+    }
+
+    // ==========================================
+    // BILINGUAL CONTENT ENGINE (EN <-> AR)
+    // ==========================================
+    let currentLang = 'en';
+
+    const translations = {
+      en: {
+        nav_home: "Home",
+        nav_journey: "Our Epic Journey",
+        nav_founder: "Leadership",
+        nav_resilience: "The Legacy",
+        nav_values: "Core Values",
+        nav_discord: "Join Discord",
+        hero_badge: "VRCHAT ARAB EMPIRE • ESTABLISHED & ASCENDANT",
+        hero_title: "STORY OF ARABS",
+        hero_subtitle: "Where Legends Forge Their Path",
+        hero_subtitle_ar: "حيث يصنع الأساطير مجدهم وتخلد القصص",
+        hero_desc: "Welcome to the pinnacle of Arab virtual community excellence. An unyielding brotherhood, transcendent virtual realms, and an authentic sanctuary engineered in VRChat for the true pioneers of virtual reality.",
+        btn_discord: "Join Our Discord",
+        btn_explore: "Explore Worlds",
+        stat_members: "Active Members",
+        stat_events: "Hosted Gatherings",
+        stat_voice: "Voice & VR Hubs",
+        stat_resilient: "Unbroken Armor",
+        journey_tag: "OUR ROOTS & ORIGIN",
+        journey_title: "The Epic Genesis: Rec Room to VRChat",
+        journey_subtitle: "The historic transition from Rec Room and how hardship was forged into supremacy",
+        journey_step1_title: "The Rec Room Dawn",
+        journey_step1_desc: "It all originated in the cozy halls of Rec Room. A small band of impassioned Arab gamers united with a dream: creating an authentic home without toxicity, where respect and camaraderie reigned supreme.",
+        journey_step1_ar: "البذرة الأولى وروح الأخوة النقية التي انطلقت من ريك روم.",
+        journey_step2_title: "The Great Metamorphosis",
+        journey_step2_desc: "When Rec Room shifted and servers fell, lesser communities scattered and dissolved into dust. But Story of Arabs didn’t bow. Instead, the leadership converted every barrier into raw fuel for reinvention.",
+        journey_step2_ar: "لم ننكسر بزوال ريك روم، بل أعدنا صياغة المستحيل وبدأنا العصر الجديد.",
+        journey_step3_title: "Ascendance in VRChat",
+        journey_step3_desc: "Migrating to VRChat opened unbounded frontiers. Custom architecture, ultra-realistic Arab heritage worlds, grand cultural festivals, and an unbreakable community footprint solidified our legendary status.",
+        journey_step3_ar: "الهيمنة على عالم الواقع الافتراضي وبناء أكبر وأرقى مجتمع عربي.",
+        journey_quote: "\"Our start in Rec Room was never just a game; it was an oath written in our hearts: that the Arab community shall stand tall, unshaken by changing platforms or fleeting tides.\"",
+        founder_badge: "VISIONARY LEADERSHIP",
+        founder_headline: "Forged in Dedication: The Architect Behind the Wall",
+        founder_headline_ar: "تحية إجلال لمؤسس الصرح «طير شلوى»",
+        founder_role: "Founder & Supreme Architect",
+        founder_p1: "True leadership is neither given nor inherited; it is earned through relentless devotion, sleepless nights, and the courage to shield an entire community from chaos.",
+        founder_p2: "بذل المؤسس «طير شلوى» ساعات طوال وليالي لا تُعد في صياغة نظام إداري عادل وصارم، لا يفرّق بين عضو وآخر، واضعاً مصلحة المجتمع وكرامة أفراده فوق كل اعتبار.",
+        founder_p3: "Under his steadfast stewardship, Story of Arabs transformed into an unbreakable citadel. He established an administrative system renowned for strict impartiality, impenetrable cybersecurity, and unwavering loyalty to every single Arab player who enters our gates.",
+        pillar1_title: "Ironclad Impartiality",
+        pillar1_desc: "No favoritism, no nepotism. Strict justice applied to all.",
+        pillar2_title: "Unbreakable Integrity",
+        pillar2_desc: "Absolute privacy and defense of every member’s dignity.",
+        resilience_tag: "THE UNBREAKABLE FORTRESS",
+        resilience_title: "The Legacy of Resilience",
+        resilience_ar_title: "تحطمت مكائدهم على صخرة تلاحمنا، فخابوا وبقينا",
+        resilience_p1: "Across our history, many adversaries, ill-willed actors, and malicious detractors tried to fracture our unity. They orchestrated attacks, circulated rumors, and launched countless campaigns attempting to see this sanctuary collapse.",
+        resilience_p2: "ولكنهم تناسوا أمراً جوهرياً: سيرفر \"Story of Arabs\" ليس مجرد غرف صوتية أو عوالم افتراضية، بل هو حصن منيع تحرسه إدارة واعية ورجال عاهدوا أنفسهم على التضحية بكل ثمين لحماية هذا البيت. لقد فشل كل حاقد وتراجع كل مخرب خاسئاً.",
+        resilience_p3: "Every attack only cemented our foundation. Every malice dissolved in front of our collective vigilance. The server did not merely survive; it thrived, expanding beyond imagination, leaving detractors in the silence of their own downfall.",
+        motto_tag: "OUR ETERNAL PLEDGE",
+        motto_text: "\"يد بيد دائماً وأبداً\"",
+        values_tag: "OUR SACRED PILLARS",
+        values_title: "Community Core Values",
+        values_subtitle: "The timeless principles governing our sanctuary everywhere, always",
+        val1_title_ar: "القوة",
+        val1_title_en: "STRENGTH",
+        val1_desc: "Inner fortitude to face difficulties and stand firm, maintaining our community’s honor and unwavering security under any circumstance.",
+        val1_footer: "عزيمة لا تلين وإصرار على التميز الدائم.",
+        val2_title_ar: "الوحدة",
+        val2_title_en: "UNITY",
+        val2_desc: "Arab brothers and sisters from the Gulf to the Ocean united as one body. No borders, no prejudice—only shared destiny and warmth.",
+        val2_footer: "قلب واحد يجمع كافة أبناء الوطن العربي.",
+        val3_title_ar: "العدالة",
+        val3_title_en: "JUSTICE",
+        val3_desc: "Rules apply unequivocally to everyone. An impartial administrative system that defends the oppressed and stops any wrongdoing instantly.",
+        val3_footer: "الحق يعلو ولا يُعلى عليه في شريعة مجتمعنا.",
+        val4_title_ar: "الأخوة",
+        val4_title_en: "BROTHERHOOD",
+        val4_desc: "Lifelong friendships forged in virtual worlds that extend beyond the screen, building memories, genuine support, and true family.",
+        val4_footer: "أخوة تمتد وتصمد في كل الأوقات والمناسبات.",
+        worlds_tag: "VIRTUAL SANCTUARIES",
+        worlds_title: "Engineered For Immersion",
+        worlds_subtitle: "Custom-crafted realms featuring cutting-edge VR tech & authentic Arab hospitality",
+        worlds_browse: "BROWSE ALL CUSTOM INSTANCES",
+        world1_desc: "Stunning modern Arabic majlis, custom audio reactive lighting, dynamic mirror setups, and chill lounge vibes for deep evening conversations.",
+        world2_desc: "An epic desert cyber-palace host to weekly tournaments, talent showdowns, community meetings, and historic celebration ceremonies.",
+        world3_desc: "Atmospheric night skies with glowing dunes, relaxing waterfalls, interactive media players, and private booths for personal heartfelt talks.",
+        btn_join_world: "Launch in VRChat",
+        cta_tag: "ENTER THE SANCTUARY",
+        cta_title: "Your Seat Among Legends Awaits",
+        cta_subtitle_ar: "انضم إلينا الآن وكن جزءاً من تاريخ يُكتب",
+        cta_desc: "Whether you are an experienced VR veteran, an avatar creator, or someone stepping into VRChat for the very first time, the Story of Arabs family opens its arms to honor-driven souls.",
+        cta_btn: "Join Discord Server",
+        cta_back: "Back to Top ↑"
+      },
+      ar: {
+        nav_home: "الرئيسية",
+        nav_journey: "رحلتنا التاريخية",
+        nav_founder: "القيادة والتأسيس",
+        nav_resilience: "قصة الصمود",
+        nav_values: "قيمنا الجوهرية",
+        nav_discord: "انضم للديسكورد",
+        hero_badge: "إمبراطورية العرب في الواقع الافتراضي • شموخ وعراقة",
+        hero_title: "STORY OF ARABS",
+        hero_subtitle: "حيث يصنع الأساطير مجدهم الخالد",
+        hero_subtitle_ar: "ملتقى العزة والشهامة في عالم VRChat",
+        hero_desc: "أهلاً بك في الصرح العربي الأول. مجتمع متماسك وُلد ليبقى، يجمع نخبة اللاعبين والمبدعين في عوالم افتراضية أسطورية لا مثيل لها.",
+        btn_discord: "انضم لسيرفر الديسكورد",
+        btn_explore: "استكشف العوالم",
+        stat_members: "عضو نشط ومتفاعل",
+        stat_events: "فعالية ومناسبة كبرى",
+        stat_voice: "رومات صوتية 24/7",
+        stat_resilient: "صمود لا ينكسر",
+        journey_tag: "الجذور والأصول",
+        journey_title: "ملحمة الانطلاق: من ريك روم إلى في آر شات",
+        journey_subtitle: "الرحلة الخالدة وكيف حوّلنا التحديات وصعاب المنصات إلى ولادة المجتمع الأقوى",
+        journey_step1_title: "فجر البدايات في ريك روم",
+        journey_step1_desc: "بدأت القصة من قاعات وأروقة لعبة Rec Room. تجمع شبابي عربي مخلص اجتمع على هدف سامٍ: بناء مجتمع خالٍ من السمية، يسوده الاحترام والود والأخوة الصادقة.",
+        journey_step1_ar: "هنا زرعنا أول بذور الصداقة والمحبة النبيلة.",
+        journey_step2_title: "التحول الأسطوري الكبير",
+        journey_step2_desc: "حينما أغلقت وتغيرت لعبة ريك روم، سقطت الكثير من السيرفرات وتلاشت في طي النسيان، لكن مجتمع Story of Arabs لم يستسلم، بل اتخذ من التغيير انطلاقة لمجد أعظم.",
+        journey_step2_ar: "الصعاب تصنع الأبطال، وتحدي الانتقال زادنا إصراراً وتلاحماً.",
+        journey_step3_title: "السيادة في VRChat",
+        journey_step3_desc: "فتح الانتقال إلى VRChat آفاقاً لا حدود لها. صممنا عوالم تحاكي حضارتنا، أقمنا أكبر التجمعات والفعاليات، وأثبتنا أننا الرقم الصعب والمجتمع العربي الأبرز على الإطلاق.",
+        journey_step3_ar: "صناعة التاريخ وتشييد الصرح الأكبر في الواقع الافتراضي.",
+        journey_quote: "\"لم تكن البداية في ريك روم مجرد لعبة، بل كانت عهداً كُتب في قلوبنا: أن يبقى مجتمع العرب شامخاً لا تهزه عواصف المنصات ولا تبدلات الزمان.\"",
+        founder_badge: "القيادة الحكيمة",
+        founder_headline: "صُنع بالتفاني والسهر: المؤسس وباني النظام",
+        founder_headline_ar: "تحية إجلال وعرفان لمؤسس السيرفر «طير شلوى»",
+        founder_role: "المؤسس والقائد الأعلى",
+        founder_p1: "القيادة الحقيقية لا تأتي بالصدفة، بل تُصنع بالتضحيات الجسام، والليالي الطوال من السهر والعمل الدؤوب لحماية المجتمع وضمان راحته وسلامته.",
+        founder_p2: "سهر المؤسس «طير شلوى» لأيام وليالٍ دون كلل لبناء نظام إداري صارم وعادل يضمن العدالة التامة لكل فرد ينضم إلينا بدون تمييز أو محاباة.",
+        founder_p3: "بفضل رؤيته الثاقبة وحكمته، تحول السيرفر إلى حصن لا يُخترق وإدارة واعية تعمل بيد واحدة على مدار الساعة لخدمة الجميع وصد أي متطفل أو حاقد.",
+        pillar1_title: "العدالة المطلقة",
+        pillar1_desc: "لا محاباة ولا تمييز، النظام والعدل فوق الجميع دائماً.",
+        pillar2_title: "الأمان والنزاهة",
+        pillar2_desc: "صون تام لكرامة وخصوصية كل من يدخل مجتمعنا.",
+        resilience_tag: "الحصن المنيع",
+        resilience_title: "ملحمة الصمود والثبات",
+        resilience_ar_title: "تحطمت مكائدهم على صخرة تلاحمنا، فخابوا وبقينا",
+        resilience_p1: "على مدار مسيرتنا، حاول الكثير من أصحاب النفوس المريضة والمخربين استهداف السيرفر وتدبير المؤامرات وبث الشائعات لزعزعة هذا الصرح الشامخ.",
+        resilience_p2: "ولكنهم اصطدموا بإدارة صلبة لا تلين، ورجال وقفوا سداً منيعاً لحماية مجتمعهم. خاب مسعى كل مخرب وتلاشت أحقادهم، وبقي السيرفر صامداً أقوى من أي وقت مضى.",
+        resilience_p3: "كل هجمة كانت تزيدنا تماسكاً وتلاحماً، وأثبتت الأيام أن سيرفر Story of Arabs عصي على الانكسار بفضل إدارته الواعية وأعضائه الأوفياء.",
+        motto_tag: "عهدنا الدائم",
+        motto_text: "\"يد بيد دائماً وأبداً\"",
+        values_tag: "أركاننا الثابتة",
+        values_title: "القيم والمبادئ الجوهرية",
+        values_subtitle: "المبادئ الأصيلة التي تحكم أسرتنا في كل عالم ومنصة",
+        val1_title_ar: "القوة",
+        val1_title_en: "STRENGTH",
+        val1_desc: "صلابة الموقف والعزيمة في مواجهة التحديات للحفاظ على رفعة السيرفر وأمنه وأمان أفراده.",
+        val1_footer: "عزيمة لا تلين وإصرار على التميز الدائم.",
+        val2_title_ar: "الوحدة",
+        val2_title_en: "UNITY",
+        val2_desc: "أبناء وبنات الوطن العربي يجتمعون كجسد واحد، بلا تفرقة ولا تمييز، تجمعنا روح واحدة.",
+        val2_footer: "قلب واحد يجمع كافة أبناء الوطن العربي.",
+        val3_title_ar: "العدالة",
+        val3_title_en: "JUSTICE",
+        val3_desc: "الإنصاف هو الأساس، القانون يسري على الصغير والكبير لحفظ الحقوق ورفع الظلم.",
+        val3_footer: "الحق يعلو ولا يُعلى عليه في شريعة مجتمعنا.",
+        val4_title_ar: "الأخوة",
+        val4_title_en: "BROTHERHOOD",
+        val4_desc: "روابط صادقة ومشاعر نبيلة تتجاوز حدود الشاشات، لتبني علاقات حقيقية تدوم لسنوات.",
+        val4_footer: "أخوة تمتد وتصمد في كل الأوقات والمناسبات.",
+        worlds_tag: "عوالمنا الافتراضية",
+        worlds_title: "صُممت لتبهر حواسك",
+        worlds_subtitle: "عوالم مخصصة تجمع بين الحداثة والأصالة العربية بأرقى جودة رسومية",
+        worlds_browse: "تصفح كافة العوالم النشطة",
+        world1_desc: "مجلس عربي راقٍ مزود بإضاءة تفاعلية مع الصوت ومرايا نقية وجلسات هادئة للمحادثات الشيقة.",
+        world2_desc: "قصر مهيب مخصص للبطولات الأسبوعية والمناسبات الكبرى وتكريم الأعضاء المتميزين.",
+        world3_desc: "واحة ليلية ساحرة بإطلالة على كثبان مضيئة وشلالات هادئة للاسترخاء مع الأصدقاء.",
+        btn_join_world: "دخول العالم في VRChat",
+        cta_tag: "ادخل عالم الأساطير",
+        cta_title: "مكانك محجوز بين نخبة العرب",
+        cta_subtitle_ar: "انضم إلينا الآن وكن شريكاً في صناعة التاريخ",
+        cta_desc: "سواء كنت من قدامى لاعبي الواقع الافتراضي، أو مصمماً للأفاتارات، أو تبدأ أولى خطواتك، عائلة Story of Arabs ترحب بك بكل فخر واعتزاز.",
+        cta_btn: "انضم لسيرفر الديسكورد الآن",
+        cta_back: "العودة للأعلى ↑"
+      }
+    };
+
+    function toggleLanguage() {
+      currentLang = currentLang === 'en' ? 'ar' : 'en';
+      const isAr = currentLang === 'ar';
+
+      // Update HTML lang & dir
+      document.documentElement.setAttribute('lang', currentLang);
+      document.documentElement.setAttribute('dir', isAr ? 'rtl' : 'ltr');
+      
+      // Update toggle button text
+      document.getElementById('langLabel').textContent = isAr ? 'English' : 'العربية';
+
+      // Update all translatable elements
+      const elements = document.querySelectorAll('[data-i18n]');
+      elements.forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[currentLang] && translations[currentLang][key]) {
+          el.textContent = translations[currentLang][key];
+        }
+      });
+    }
+
+    // ==========================================
+    // INTERACTIVE CANVAS (SILVER STAR PARTICLES)
+    // ==========================================
+    const canvas = document.getElementById('mesh-canvas');
+    const ctx = canvas.getContext('2d');
+
+    let width, height;
+    let particles = [];
+
+    function resizeCanvas() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.vx = (Math.random() - 0.5) * 0.45;
+        this.vy = (Math.random() - 0.5) * 0.45;
+        this.radius = Math.random() * 1.6 + 0.5;
+        this.baseAlpha = Math.random() * 0.5 + 0.2;
+        this.alpha = this.baseAlpha;
+      }
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+
+        if (this.x < 0) this.x = width;
+        if (this.x > width) this.x = 0;
+        if (this.y < 0) this.y = height;
+        if (this.y > height) this.y = 0;
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(226, 226, 236, ${this.alpha})`;
+        ctx.fill();
+      }
+    }
+
+    // Initialize particles
+    const particleCount = Math.min(Math.floor(window.innerWidth / 15), 75);
+    for (let i = 0; i < particleCount; i++) {
+      particles.push(new Particle());
+    }
+
+    // Render loop connecting nearby particles
+    function render() {
+      ctx.clearRect(0, 0, width, height);
+
+      // Draw subtle connecting lines
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < 110) {
+            const lineAlpha = (1 - dist / 110) * 0.12;
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.strokeStyle = `rgba(220, 220, 235, ${lineAlpha})`;
+            ctx.lineWidth = 0.75;
+            ctx.stroke();
+          }
+        }
+      }
+
+      // Draw particles
+      particles.forEach(p => {
+        p.update();
+        p.draw();
+      });
+
+      requestAnimationFrame(render);
+    }
+    render();
+  </script>
+</body>
+</html>
